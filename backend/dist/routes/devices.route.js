@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const devices_controllers_1 = require("../controllers/devices.controllers");
+const express_1 = require("express");
+const middleware_1 = require("../middleware");
+const device_schema_1 = require("../schemas/device.schema");
+const router = (0, express_1.Router)();
+router.post("/uncannycams", (0, middleware_1.validate)(device_schema_1.dataSchema), devices_controllers_1.postDevices);
+router.get("/uncannycams", devices_controllers_1.getDevices);
+router.delete("/uncannycams/:id", devices_controllers_1.deleteDevice);
+router.put("/uncannycams/:id", devices_controllers_1.editDevice);
+exports.default = router;
