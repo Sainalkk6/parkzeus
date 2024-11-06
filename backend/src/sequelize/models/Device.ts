@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from ".";
+import sequelize from "./sequelise";
 import { Camera } from "./Camera";
 
 export interface DeviceAttributes {

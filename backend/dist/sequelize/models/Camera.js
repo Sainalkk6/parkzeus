@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Camera = void 0;
 const sequelize_1 = require("sequelize");
 const Device_1 = require("./Device");
-const _1 = __importDefault(require("."));
+const sequelise_1 = __importDefault(require("./sequelise"));
 class Camera extends sequelize_1.Model {
 }
 exports.Camera = Camera;
@@ -40,8 +40,18 @@ Camera.init({
         defaultValue: sequelize_1.DataTypes.NOW,
         type: sequelize_1.DataTypes.DATE,
         allowNull: false
+    },
+    ip: {
+        type: sequelize_1.DataTypes.STRING
+    },
+    port: {
+        type: sequelize_1.DataTypes.INTEGER
+    },
+    saved: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: false
     }
 }, {
-    sequelize: _1.default,
+    sequelize: sequelise_1.default,
     modelName: 'Camera'
 });

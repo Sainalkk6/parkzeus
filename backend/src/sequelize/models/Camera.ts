@@ -1,22 +1,30 @@
 import { DataTypes, Model } from "sequelize";
 import { Device } from "./Device";
-import sequelize from ".";
+import sequelize from "./sequelise";
 
 export interface CameraAttributes {
-    cameraId:number;
-    name:string;
-    activated:boolean;
-    external_id:number | null;
-    deviceId:number;
-    createdAt:Date
+    cameraId: number;
+    name: string;
+    activated: boolean;
+    external_id: number | null;
+    deviceId: number;
+    createdAt: Date;
+    ip: string;
+    port: number;
+    saved: boolean;
 }
 
-export class Camera extends Model<CameraAttributes>{
-    public cameraId!:number
-    public name!:string
-    public activated!:boolean
-    public external_id!:number|null
-    public deviceId!:number
+export class Camera extends Model<CameraAttributes> {
+    public cameraId!: number
+    public name!: string
+    public activated!: boolean
+    public external_id!: number | null
+    public deviceId!: number
+    public ip: string | undefined
+    public port: number | undefined
+    public saved!: boolean
+
+
 }
 Camera.init({
     cameraId: {
@@ -48,6 +56,16 @@ Camera.init({
         defaultValue: DataTypes.NOW,
         type: DataTypes.DATE,
         allowNull: false
+    },
+    ip: {
+        type: DataTypes.STRING
+    },
+    port: {
+        type: DataTypes.INTEGER
+    },
+    saved: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 }, {
     sequelize,

@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { createDevice, deleteSpecificDevice, edit, getAllDevices } from "../services/devices.services";
+import { createDevice, deleteSpecificDevice, edit, getAllDevices } from "../services/devices.service";
 
 
 

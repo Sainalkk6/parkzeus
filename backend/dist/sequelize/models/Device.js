@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Device = void 0;
 const sequelize_1 = require("sequelize");
-const _1 = __importDefault(require("."));
+const sequelise_1 = __importDefault(require("./sequelise"));
 const Camera_1 = require("./Camera");
 class Device extends sequelize_1.Model {
 }
@@ -38,7 +38,7 @@ Device.init({
         allowNull: false
     }
 }, {
-    sequelize: _1.default,
+    sequelize: sequelise_1.default,
     modelName: "device"
 });
 Device.hasMany(Camera_1.Camera, {
