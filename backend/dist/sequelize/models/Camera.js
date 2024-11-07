@@ -50,6 +50,9 @@ Camera.init({
     saved: {
         type: sequelize_1.DataTypes.BOOLEAN,
         defaultValue: false
+    },
+    label: {
+        type: sequelize_1.DataTypes.STRING
     }
 }, {
     sequelize: sequelise_1.default,

@@ -25,11 +25,11 @@ Device.init({
         allowNull: false
     },
     port: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: false
     },
     dashboardPort: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: false
     },
     createdAt: {

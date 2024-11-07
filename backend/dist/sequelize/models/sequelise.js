@@ -8,8 +8,7 @@ const options = {
     database: process.env.POSTGRES_DB,
     port: process.env.POSTGRES_DB_PORT,
     host: process.env.POSTGRES_HOST,
-    dialect: "postgres",
-    sync: { alter: true }
+    dialect: "postgres"
 };
 const sequelize = new sequelize_1.Sequelize(options);
 exports.default = sequelize;

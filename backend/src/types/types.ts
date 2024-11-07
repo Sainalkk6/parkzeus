@@ -8,4 +8,5 @@ export type NewCameraType = {
     ip?: string;
     port?: number;
     saved?: boolean;
+    label?:string
 }

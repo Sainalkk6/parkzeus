@@ -1,11 +1,11 @@
-import Aside from "@/components/Aside/Aside";
-import Main from "@/components/Main/Main";
+import Aside from "@/components/aside/Aside";
+import Main from "@/components/main/Main";
 
 import React from "react";
 
 const Home = () => {
   return (
-    <div className="flex min-h-screen w-full bg-gray-50">
+    <div className="flex h-screen w-full bg-gray-50">
       <Aside />
       <Main/>
     </div>

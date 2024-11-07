@@ -28,6 +28,6 @@ app.use(camera_route_1.default);
 const connect = () => __awaiter(void 0, void 0, void 0, function* () {
     sequelise_1.default.authenticate();
     sequelise_1.default.sync();
-    app.listen(process.env.PORT, () => console.log(`server is running on port ${process.env.PORT}`));
+    app.listen(process.env.PORT, () => console.log(`Server is running on port ${process.env.PORT}`));
 });
 connect();

@@ -4,17 +4,21 @@ import React, { useRef, useState } from "react";
 import CustomButton from "./CustomButton";
 import UncannyDeviceform from "./UncannyDeviceform";
 import CarridaDeviceForm from "./CarridaDeviceForm";
+import { useGetDevicesQuery } from "@/customhooks/devices/useGetDevices";
+import { DeviceType } from "@/types/type";
+import { useDeleteDevice } from "@/customhooks/devices/useDeleteDevice";
 
 const DevicesRegister = () => {
   const [showDevice, setShowDevice] = useState(false);
   const [uncanny, setUncanny] = useState([] as number[]);
   const [carrida,setCarrida] = useState([]as number[])
+  const {data} = useGetDevicesQuery()
+  const {mutate} = useDeleteDevice()
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const handleClick = () => setShowDevice(!showDevice);
   const showUncanny = () => {
     const newId = Date.now();
-    console.log(newId);
     setShowDevice(false);
     setUncanny((prevIds) => [...prevIds, newId]);
   };
@@ -32,6 +36,9 @@ const DevicesRegister = () => {
   return (
     <section className="bg-white p-5 rounded-md shadow-sm border">
       <h1 className="text-lg text-black mb-4">Access Control ANPR Devices</h1>
+      {data && data.map((device:DeviceType)=>(
+        <UncannyDeviceform device={device} key={device.id} deleteForm={()=>mutate(device.id)}  />
+      ))}
       {uncanny.map((id) => (
         <UncannyDeviceform key={id} deleteForm={() => deleteUncanny(id)} />
       ))}
