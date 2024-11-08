@@ -18,7 +18,8 @@ const postDevices = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(201).json(device);
     }
     catch (error) {
-        res.status(400).json({ message: "Something went wrong", error });
+        res.status(400);
+        throw new Error("The data you have entered is not valid");
     }
 });
 exports.postDevices = postDevices;
@@ -28,7 +29,8 @@ const getDevices = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return res.status(200).json(devices);
     }
     catch (error) {
-        return res.status(400).json({ message: "Something went wrong", error });
+        res.status(404);
+        throw new Error("Something went wrong while trying to fetch the device");
     }
 });
 exports.getDevices = getDevices;
@@ -39,7 +41,8 @@ const deleteDevice = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         return res.status(200).json({ message: "Successfully removed" });
     }
     catch (error) {
-        return res.status(400).json({ message: "Something went wrong", error });
+        res.status(404);
+        throw new Error("Device not found cause it may have been deleted already");
     }
 });
 exports.deleteDevice = deleteDevice;
@@ -51,7 +54,8 @@ const editDevice = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return res.status(200).json({ message: "Data has been edited successfully" });
     }
     catch (error) {
-        return res.status(400).json({ message: "Something went wrong", error });
+        res.status(404);
+        throw new Error("Device not found or it doesnt exist");
     }
 });
 exports.editDevice = editDevice;
