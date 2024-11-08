@@ -17,11 +17,14 @@ const UncannyDeviceform = ({ device, deleteForm }: DeviceRegisterFormType) => {
     initialValues: {
       dashboardPort: device?.dashboardPort || "",
       ip: device?.ip || "",
-      label: device?.label,
-      port: device?.port,
+      label: device?.label || "",
+      port: device?.port || "",
     } as AccessControlDevicesType,
     onSubmit: (values) => {
-      if (device?.id) {
+      deleteForm()
+      postDevice({ ...values, port: Number(values.port), dashboardPort: Number(values.dashboardPort) });
+      console.log(device);
+      if (device) {
         editDevice({
           ...values,
           id: device.id,
@@ -30,22 +33,19 @@ const UncannyDeviceform = ({ device, deleteForm }: DeviceRegisterFormType) => {
           port: Number(values.port),
           dashboardPort: Number(values.dashboardPort),
         });
-      } else {
-        postDevice({ ...values, port: Number(values.port), dashboardPort: Number(values.dashboardPort) });
-      }
+      }       
     },
     validationSchema: deviceSchema,
   });
 
-  console.log(touched.label);
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex gap-2 items-start justify-between">
         <div className="flex gap-2 basis-full">
-          <CustomInputContainer touched={touched } placeholder="Label" id="label" type="text" value={values.label} label="Label" handleChange={handleChange} />
-          <CustomInputContainer touched={touched } id="ip" placeholder="IP" value={values.ip} type="number" label="IP" handleChange={handleChange} />
-          <CustomInputContainer touched={touched } id="port" placeholder="Port" value={values.port} type="number" label="Port" handleChange={handleChange} />
-          <CustomInputContainer touched={touched} id="dashboardPort" placeholder="Dashboard Port" type="number" value={values.dashboardPort} label="Dashboard Port" handleChange={handleChange} />
+          <CustomInputContainer  placeholder="Label" id="label" type="text" value={values.label} label="Label" handleChange={handleChange} />
+          <CustomInputContainer  id="ip" placeholder="IP" value={values.ip} type="text" label="IP" handleChange={handleChange} />
+          <CustomInputContainer  id="port" placeholder="Port" value={values.port} type="number" label="Port" handleChange={handleChange} />
+          <CustomInputContainer  id="dashboardPort" placeholder="Dashboard Port" type="number" value={values.dashboardPort} label="Dashboard Port" handleChange={handleChange} />
         </div>
         <div className="flex gap-2 mt-6">
           <CustomFormButton label="Save" type="submit" />

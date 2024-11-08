@@ -3,19 +3,27 @@ import { useGetCamera } from "@/customhooks/cameras/useGetCamera";
 import { CameraType, CamerCardType } from "@/types/type";
 import React, { useState } from "react";
 import CameraButton from "./CameraButton";
+import { useRefetchCamera } from "@/customhooks/cameras/useRefetchCamera";
 
 const CameraCard = ({ deviceId, deviceIp, deviceLabel, devicePort }: CamerCardType) => {
-  const { data } = useGetCamera(deviceId);
+  const { data,isLoading,isError } = useGetCamera(deviceId);
+  const {mutate} = useRefetchCamera()
   const savedCameras = data?.data.filter((cam: CameraType) => cam.saved === true);
   const unSavedCameras = data?.data.filter((cam: CameraType) => cam.saved === false);
 
-
+  if(isLoading){
+    return <div>Loading...</div>
+  }
+  
+  if(isError){
+    return <div>Something went wrong</div>
+  }
 
   return (
     <div className="border-b pb-5 last:border-none min-h-24 text-black">
       <div className="flex justify-between">
         <span className="self-end text-sm text-gray-600">{`${deviceLabel} | ${deviceIp}:${devicePort}`}</span>
-        <button className="p-2 bg-[#e46176] rounded-md hover:scale-110 h-fit ml-auto block transition-all duration-200">
+        <button onClick={()=> mutate(deviceId)} className="p-2 bg-[#e46176] rounded-md hover:scale-110 h-fit ml-auto block transition-all duration-200">
           <img src="/refresh.svg" alt="refetch" />
         </button>
       </div>

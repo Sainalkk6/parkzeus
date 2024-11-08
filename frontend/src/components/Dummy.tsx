@@ -47,7 +47,7 @@ const Dummy = () => {
         </div>
       </div>
 
-      {/* <!-- Test 002 --> */}
+      {/* This is where we split things between us */}
       <div className="border-b pb-5 last:pb-0 last:border-none min-h-24">
         <div className="flex justify-between">
           <span className="self-end text-sm text-gray-600">

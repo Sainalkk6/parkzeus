@@ -19,14 +19,12 @@ export type AccessControlDevicesType = {
 }
 
 export type InputContainerPropType = {
-
-    touched:FormikTouched<AccessControlDevicesType>
     label: string;
     value: string | number;
     handleChange: ChangeEventHandler<HTMLInputElement>;
     id: string;
-    type:"text"|"number"
-    placeholder:string;
+    type: "text" | "number"
+    placeholder: string;
 }
 
 export type CustomButtonPropType = {
@@ -68,7 +66,7 @@ export type DeviceInitialValue = {
 export type CamerCardType = {
     deviceLabel: string;
     deviceIp: string;
-    devicePort: string;
+    devicePort: number;
     deviceId: number;
 }
 
@@ -117,4 +115,10 @@ export type ModalPropType = {
     deviceId: number;
     cam: CameraType;
 
-} 
+}
+
+export type CameraContainerPropType = {
+    isLoading: boolean;
+    isError: boolean;
+    data: DeviceType[];
+}
