@@ -3,3 +3,4 @@
 **/.env*
 **/.next
 frontend/.next
+backend/dist

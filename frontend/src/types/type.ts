@@ -132,8 +132,8 @@ export type TableHeadingPropType = {
 
 export type IdentifierFormType = {
     setShowModal: React.Dispatch<SetStateAction<boolean>>;
-    id:number;
-    setId:React.Dispatch<SetStateAction<number>>
+    id: number;
+    setId: React.Dispatch<SetStateAction<number>>
 }
 
 export type MiniFormContainerType = {
@@ -175,8 +175,8 @@ export type IdentifierTablePropType = {
 }
 
 export type IdentifierELementType = {
-    id:number
-    setId:React.Dispatch<SetStateAction<number>>;
+    id: number
+    setId: React.Dispatch<SetStateAction<number>>;
     showModal: boolean;
     index?: number;
     identifierId: string;
@@ -203,5 +203,19 @@ export type FetchedIdentifier = {
     email: string;
     validFrom: string;
     validTo: string
-    id:number
+    id: number
 }
+
+export type EventCardMiniContainerPropType = {
+    value: string;
+    label: string;
+}
+
+export type EventDataType = {
+    cameraName: string;
+    externalId: number;
+    identifierId: string;
+    images: string[];
+    timeStamp: string;
+}
+
