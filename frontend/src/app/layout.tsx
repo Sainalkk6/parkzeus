@@ -5,12 +5,18 @@ export const metadata = {
 
 import QueryProvider from "@/providers/QueryProvider";
 import "./globals.css";
+import Aside from "@/components/aside/Aside";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <div className="flex h-screen w-full bg-gray-50">
+            <Aside />
+            {children}
+          </div>
+        </QueryProvider>
       </body>
     </html>
   );

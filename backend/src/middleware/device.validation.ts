@@ -7,7 +7,10 @@ export const validate = (schema: AnyZodObject) => {
             schema.parse(req.body)
             next()
         } catch (error) {
-            res.status(400).json({ message: "Something went wrong", error })
+            next(error)
+            res.status(400)
+            throw new Error("Data you have entered have some validation problem please check and try again",)
+
         }
     }
 }

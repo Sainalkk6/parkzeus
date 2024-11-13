@@ -1,17 +1,13 @@
 import { Device, DeviceAttributes } from "../sequelize/models/Device";
 
 const createDevice = async (data: DeviceAttributes) => {
-    try {
-        await Device.create(data);
-        return ("Data has been added successfully")
-    } catch (error) {
-        return error
-    }
+    await Device.create(data);
+    return ("Data has been added successfully")
 }
 
 
 const getAllDevices = async () => {
-    const result = Device.findAll()
+    const result = await Device.findAll()
     return result
 }
 

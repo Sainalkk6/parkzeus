@@ -1,5 +1,5 @@
 import { FormikErrors, FormikTouched } from "formik";
-import { ChangeEventHandler, SetStateAction } from "react";
+import React, { ChangeEventHandler, SetStateAction } from "react";
 
 export type CustomLabelPropType = {
     label: string;
@@ -9,6 +9,8 @@ export type CustomLabelPropType = {
 export type CustomListItemPropType = {
     label: string;
     isActive?: boolean;
+    pointer?: string;
+    setActiveLink?: React.Dispatch<React.SetStateAction<string>>
 }
 
 export type AccessControlDevicesType = {
@@ -121,4 +123,85 @@ export type CameraContainerPropType = {
     isLoading: boolean;
     isError: boolean;
     data: DeviceType[];
+}
+
+export type TableHeadingPropType = {
+    label: string | number;
+    width?: string;
+}
+
+export type IdentifierFormType = {
+    setShowModal: React.Dispatch<SetStateAction<boolean>>;
+    id:number;
+    setId:React.Dispatch<SetStateAction<number>>
+}
+
+export type MiniFormContainerType = {
+    handleBlur?: (e: React.FocusEvent<any, Element>) => void;
+    type: "select" | "input"
+    label: string;
+    options?: { label: string, value: string }[];
+    placeholder?: string;
+    handleChange: (e: React.ChangeEvent<any>) => void;
+    value?: string | number;
+    name?: string;
+}
+
+export type FormDatePropType = {
+    label: string;
+    handleChange: (e: React.ChangeEvent<any>) => void;
+    value?: string | number;
+    name?: string;
+}
+
+export type IdentifierDataType = {
+    identifierId: string
+    licensePlate: string;
+    parkingId: number;
+    organizationName: string;
+    vehicleType: string;
+    rfid: string;
+    identifierType: string;
+    owner: string;
+    email: string;
+    validFrom: string;
+    validTo: string
+}
+
+export type IdentifierTablePropType = {
+    data: FetchedIdentifier[]
+    setShowModal: React.Dispatch<SetStateAction<boolean>>
+    showModal: boolean;
+}
+
+export type IdentifierELementType = {
+    id:number
+    setId:React.Dispatch<SetStateAction<number>>;
+    showModal: boolean;
+    index?: number;
+    identifierId: string;
+    parkingId: number;
+    organizationName: string;
+    vehicleType: string;
+    owner: string;
+    email: string;
+    validFrom: string;
+    validTo: string;
+    identifierType: string;
+    setShowModal: React.Dispatch<SetStateAction<boolean>>
+}
+
+export type FetchedIdentifier = {
+    identifierId: string
+    licensePlate: string;
+    parkingId: number;
+    organizationName: string;
+    vehicleType: string;
+    rfid: string;
+    identifierType: string;
+    owner: string;
+    email: string;
+    validFrom: string;
+    validTo: string
+    id:number
 }

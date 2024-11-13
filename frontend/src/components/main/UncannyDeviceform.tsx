@@ -13,7 +13,7 @@ const UncannyDeviceform = ({ device, deleteForm }: DeviceRegisterFormType) => {
   const { mutate: editDevice } = useEditDevice();
   const getFormattedDateTime = (): string => new Date().toISOString().replace("T", " ").replace("Z", "") + new Date().toString().match(/([+\-]\d{2}:\d{2})$/)?.[0] || "";
 
-  const { values, handleChange, handleSubmit, touched } = useFormik({
+  const { values, handleChange, handleSubmit } = useFormik({
     initialValues: {
       dashboardPort: device?.dashboardPort || "",
       ip: device?.ip || "",

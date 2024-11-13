@@ -1,11 +1,13 @@
+"use client"
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import CustomLabel from "./CustomLabel";
 import CustomListItems from "./CustomListItems";
 import ListContainer from "./Listcontainer";
 
 
 const Aside = () => {
+  const [activeLink,setActiveLink] = useState("ANPR Settings")
   return (
     <div className="shadow-md bg-white py-4  flex flex-col min-h-screen h-full md:w-1/4 lg:w-1/5 xl:w-1/6">
       <div className="ml-6">
@@ -17,9 +19,9 @@ const Aside = () => {
             <CustomLabel label="Access Control" image="/shield.svg" />
             <ul className="p-2 mt02 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 ">
               <CustomListItems label="Configuration" />
-              <CustomListItems label="ANPR Settings" isActive />
+              <CustomListItems setActiveLink={setActiveLink} pointer="/" label="ANPR Settings" isActive ={activeLink === "ANPR Settings" ? true : false } />
               <CustomListItems label="Gates and Actuators" />
-              <CustomListItems label="Identifiers" />
+              <CustomListItems setActiveLink={setActiveLink} isActive= {activeLink === "Identifiers" ? true : false} pointer="identifiers" label="Identifiers" />
               <CustomListItems label="Reservations" />
               <CustomListItems label="Alerts" />
               <CustomListItems label="ANPR Events" />

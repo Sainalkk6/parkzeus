@@ -14,7 +14,7 @@ const CarridaDeviceForm = ({ deleteForm }: DeviceRegisterFormType) => {
       <div className="flex gap-2 items-start justify-between">
         <div className="flex gap-2 basis-full">
           <div className="mb-2 w-full">
-            <CustomInputContainer id="label" value={values.label} label="Label" handleChange={handleChange} />
+            <CustomInputContainer type="text" placeholder="" id="label" value={values.label} label="Label" handleChange={handleChange} />
           </div>
         </div>
         <div className="flex gap-2 mt-6">

@@ -12,17 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.edit = exports.deleteSpecificDevice = exports.getAllDevices = exports.createDevice = void 0;
 const Device_1 = require("../sequelize/models/Device");
 const createDevice = (data) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield Device_1.Device.create(data);
-        return ("Data has been added successfully");
-    }
-    catch (error) {
-        return error;
-    }
+    yield Device_1.Device.create(data);
+    return ("Data has been added successfully");
 });
 exports.createDevice = createDevice;
 const getAllDevices = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = Device_1.Device.findAll();
+    const result = yield Device_1.Device.findAll();
     return result;
 });
 exports.getAllDevices = getAllDevices;

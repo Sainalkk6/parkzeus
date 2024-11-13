@@ -23,7 +23,7 @@ const getCameras = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.getCameras = getCameras;
-const editCamera = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const editCamera = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
         const camera = req.body;
@@ -31,30 +31,33 @@ const editCamera = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return res.status(200).json({ message: "Data has been updated successfully" });
     }
     catch (error) {
+        next(error);
         res.status(404);
         throw new Error("Camera not found or it doesnt exist");
     }
 });
 exports.editCamera = editCamera;
-const deleteCamera = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const deleteCamera = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
         yield (0, camera_service_1.deleteCam)(id);
         return res.status(200).json({ message: "Successfully deleted the camera" });
     }
     catch (error) {
+        next(error);
         res.status(404);
         throw new Error("Camera not found or it has been already removed");
     }
 });
 exports.deleteCamera = deleteCamera;
-const addCamera = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const addCamera = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = req.body;
         const camera = yield (0, camera_service_1.addCam)(data);
         return res.status(200).json({ message: "Successfully added a cam to the data", data: camera });
     }
     catch (error) {
+        next(error);
         res.status(400);
         throw new Error("The data you have entered is not valid");
     }

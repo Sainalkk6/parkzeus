@@ -1,7 +1,7 @@
 
 import { deleteDevice, editDevice, getDevices, postDevices } from "../controllers/devices.controller";
 import { Router } from "express";
-import { validate } from "../middleware/validation";
+import { validate } from "../middleware/device.validation";
 import { dataSchema } from "../schemas/device.schema";
 
 
