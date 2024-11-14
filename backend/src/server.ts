@@ -9,6 +9,7 @@ import errorHandler from "./middleware/errorHandler"
 import identifierRoute from "./routes/identifier.routes"
 import eventRoute from "./routes/events.routes"
 
+
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: false }))
