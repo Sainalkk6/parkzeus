@@ -7,7 +7,6 @@ const createEntryLog = async (data: TransactionAttributes) => {
     }
 
     if (isIn !== null && isIn?.entryTime !== null) {
-        console.log("yeehaa")
         await Transaction.update({ invalidatedAt: new Date () }, { where: { identifierId: isIn.identifierId } })
         await Transaction.create(data)
     }
@@ -32,24 +31,6 @@ const createExitLog = async (data: TransactionAttributes) => {
         await Transaction.update({ invalidatedAt: new Date() }, { where: { identifierId: isOut.identifierId } })
         await Transaction.create(data)
     }
-
-    // if (isOut) {
-    //     if (isOut.entryTime && !isOut.exitTime) {
-    //         Transaction.update({ exitTime: new Date() }, { where: { identifierId: isOut.identifierId } })
-    //     } else if (!isOut.entryTime && isOut.exitTime) {
-    //         console.log("yaaay")
-    //         await Transaction.update({ invalidatedAt: new Date() }, { where: { identifierId: isOut.identifierId } })
-    //         await Transaction.create({ ...data, exitTime: new Date() })
-    //     }
-    // }
-    // if (!isOut) {
-    //     await Transaction.create(data)
-    // }
-
-    // if (isOut && isOut.exitTime) {
-    //     await Transaction.update({ invalidatedAt: new Date }, { where: { identifierId: isOut.identifierId } })
-    //     await Transaction.create(data)
-    // }
 }
 
 export { createEntryLog, createExitLog }
