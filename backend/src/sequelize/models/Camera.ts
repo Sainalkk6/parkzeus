@@ -13,6 +13,7 @@ export interface CameraAttributes {
     port: number;
     saved: boolean;
     label:string;
+    type:string;
 }
 
 export class Camera extends Model<CameraAttributes> {
@@ -24,7 +25,7 @@ export class Camera extends Model<CameraAttributes> {
     public ip: string | undefined
     public port: number | undefined
     public saved!: boolean
-
+    public type!:string
 
 }
 Camera.init({
@@ -70,6 +71,10 @@ Camera.init({
     },
     label:{
         type:DataTypes.STRING
+    },
+    type:{
+        type:DataTypes.STRING,
+        allowNull:false
     }
 }, {
     sequelize,

@@ -7,7 +7,6 @@ import ListContainer from "./Listcontainer";
 
 const Aside = () => {
   const [activeLink, setActiveLink] = useState("ANPR Settings");
-  console.log(activeLink);
   return (
     <div className="shadow-md bg-white py-4  flex flex-col min-h-screen h-full md:w-1/4 lg:w-1/5 xl:w-1/6">
       <div className="ml-6">

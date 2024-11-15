@@ -55,7 +55,8 @@ export type CameraType = {
     ip?: string;
     port?: number;
     saved?: boolean;
-    label?: string
+    label?: string;
+    type:string
 }
 
 export type DeviceInitialValue = {
@@ -110,6 +111,7 @@ export interface CameraAttributes {
     port: number;
     saved: boolean;
     label: string;
+    type:string
 }
 
 export type ModalPropType = {
