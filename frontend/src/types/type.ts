@@ -221,3 +221,14 @@ export type EventDataType = {
     timeStamp: string;
 }
 
+export type AccessReportType = {
+    duration:string;
+    entryGate:string;
+    exitGate:string;
+    tagNo:string;
+    validityStatus:string;
+    vehicleCategory:string;
+    vehicleNumber:string;
+    entryTime:string;
+    exitTime:string;
+}

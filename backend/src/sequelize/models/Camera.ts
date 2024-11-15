@@ -26,6 +26,7 @@ export class Camera extends Model<CameraAttributes> {
     public port: number | undefined
     public saved!: boolean
     public type!:string
+    public label: string | undefined;
 
 }
 Camera.init({
