@@ -23,7 +23,6 @@ const UncannyDeviceform = ({ device, deleteForm }: DeviceRegisterFormType) => {
     onSubmit: (values) => {
       deleteForm()
       postDevice({ ...values, port: Number(values.port), dashboardPort: Number(values.dashboardPort) });
-      console.log(device);
       if (device) {
         editDevice({
           ...values,

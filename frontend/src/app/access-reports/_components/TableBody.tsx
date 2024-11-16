@@ -6,7 +6,6 @@ import { AccessReportType } from "@/types/type";
 
 const TableBody = () => {
   const { data } = useGetAccessReports();
-  console.log(data?.data)
 
   return <div className="overflow-y-scroll max-h-[60vh]">{data?.data  && data.data.map((item: AccessReportType, index: number) => <TableContent key={index} {...item} />)}</div>;
 };

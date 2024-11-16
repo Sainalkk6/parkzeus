@@ -53,7 +53,6 @@ const IdentifierForm = (props: IdentifierFormType) => {
     },
     validationSchema: identifierSchema,
   });
-  console.log(errors)
 
   return (
     <div className="mt-4">

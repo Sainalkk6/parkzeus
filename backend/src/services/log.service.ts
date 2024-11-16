@@ -31,7 +31,7 @@ const getLog = async () => {
             else if (cam?.type === "exit") exitCam = cam.label!
 
         })
-  
+
         const entryDate = log?.entryTime?.toString().slice(0, 15)
         const exitDate = log?.exitTime?.toString().slice(0, 15)
         const formattedEntryTime = log?.entryTime?.toString().slice(17, 24)
@@ -57,7 +57,7 @@ const getLog = async () => {
             exitGate: exitCam || "",
             entryTime: finalEntryTime || "-",
             exitTime: finalExitTime || "-",
-            duration: log?.invalidatedAt ? "-" : formattedTime,
+            duration: log?.invalidatedAt || (entryTime == undefined || exitTime == undefined) ? "-" : formattedTime,
             validityStatus: log?.invalidatedAt ? "Invalid" : "Valid"
         })
     }
@@ -105,9 +105,7 @@ const createPdfReport = async (res: Response) => {
         ])
     }
 
-    await doc.table(table as any, {
-
-    })
+    await doc.table(table as any)
 
     doc.end()
 };

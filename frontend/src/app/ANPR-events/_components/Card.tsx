@@ -4,8 +4,8 @@ import { EventDataType } from "@/types/type";
 
 const Card = (props: EventDataType) => {
   const { cameraName, externalId, identifierId, images, timeStamp } = props;
-  const date = timeStamp.slice(4, 15);
-  const time = timeStamp.slice(15, 24);
+  const date = timeStamp.slice(4, 11);
+  const time = timeStamp.slice(15, 22);
 
   return (
     <div className="p-5 space-y-2 border border-gray-300 rounded-md bg-gray-100 shadow-sm">
