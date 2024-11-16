@@ -8,7 +8,7 @@ const TableBody = () => {
   const { data } = useGetAccessReports();
   console.log(data?.data)
 
-  return <div className="overflow-y-scroll max-h-[70vh]">{data?.data  && data.data.map((item: AccessReportType, index: number) => <TableContent key={index} {...item} />)}</div>;
+  return <div className="overflow-y-scroll max-h-[60vh]">{data?.data  && data.data.map((item: AccessReportType, index: number) => <TableContent key={index} {...item} />)}</div>;
 };
 
 export default TableBody;
