@@ -31,7 +31,7 @@ const getIdentifiers = async (req: Request, res: Response, next: NextFunction) =
     } catch (error) {
         next(error)
         res.status(404)
-        throw new Error("Something went wrong when fetching the identifiers")
+
     }
 }
 
@@ -43,7 +43,6 @@ const deleteIdentifier = async (req: Request, res: Response, next: NextFunction)
     } catch (error) {
         next(error)
         res.status(404)
-        throw new Error("We couldnt find what you are looking for")
     }
 }
 
@@ -58,7 +57,6 @@ const editIdentifier = async (req: Request, res: Response, next: NextFunction) =
     } catch (error) {
         next(error)
         res.status(404)
-        throw new Error("We could'nt find what you are looking for")
     }
 }
 

@@ -41,6 +41,7 @@ Identifier.init({
     identifierId: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique:true
     },
     licensePlate: {
         type: DataTypes.STRING,

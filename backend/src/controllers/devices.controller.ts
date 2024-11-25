@@ -12,7 +12,6 @@ const postDevices = async (req: Request, res: Response , next:NextFunction) => {
     } catch (error) {
         next(error)
         res.status(400)
-        throw new Error("The data you have entered is not valid")
     }
 }
 
@@ -23,7 +22,6 @@ const getDevices = async (req: Request, res: Response , next:NextFunction) => {
     } catch (error) {
         next(error)
         res.status(404)
-        throw new Error("Something went wrong while trying to fetch the device")
     }
 }
 
@@ -35,7 +33,7 @@ const deleteDevice = async (req: Request, res: Response , next:NextFunction) => 
     } catch (error) {
         next(error)
         res.status(404)
-        throw new Error("Device not found cause it may have been deleted already")
+
     }
 }
 
@@ -48,7 +46,7 @@ const editDevice = async (req: Request, res: Response , next:NextFunction) => {
     } catch (error) {
         next(error)
         res.status(404)
-        throw new Error("Device not found or it doesnt exist")
+
     }
 }
 

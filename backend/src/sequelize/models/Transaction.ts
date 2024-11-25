@@ -8,7 +8,6 @@ export interface TransactionAttributes {
     exitTime:Date | null;
     invalidatedAt:Date | null
     identifierId:string;
-    cameraIdentifier:number
 }
 
 export class Transaction extends Model<TransactionAttributes>{
@@ -17,7 +16,6 @@ export class Transaction extends Model<TransactionAttributes>{
     public exitTime!: Date | null;
     public invalidatedAt!:Date | null
     public identifierId!:string 
-    public cameraIdentifier!:number
     
 }
 
@@ -41,26 +39,9 @@ Transaction.init({
     invalidatedAt:{
         type:DataTypes.DATE,
     },
-    cameraIdentifier:{
-        type:DataTypes.INTEGER,
-        allowNull:false,
-        references:{
-            model:Camera,
-            key:"cameraId"
-        }
-    }
+
 },{
     sequelize,
     modelName:"Transaction"
 })
 
-
-Camera.hasMany(Transaction,{
-    foreignKey:"cameraIdentifier",
-    as:"logs"
-})
-
-Transaction.belongsTo(Camera,{
-    foreignKey:"cameraIdentifier",
-    as:"camera"
-})

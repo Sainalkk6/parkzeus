@@ -9,7 +9,6 @@ export const validate = (schema: AnyZodObject) => {
         } catch (error) {
             next(error)
             res.status(400)
-            throw new Error("Something went wrong while validating please recheck what you have entered and try again")
         }
     }
 }

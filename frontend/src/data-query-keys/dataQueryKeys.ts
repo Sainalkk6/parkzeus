@@ -2,5 +2,6 @@ export const dataQueryKeys = {
     devices: "devices",
     cameras: "cameras",
     identifiers:"identifiers",
-    events:"events"
+    events:"events",
+    reports:"reports"
 }

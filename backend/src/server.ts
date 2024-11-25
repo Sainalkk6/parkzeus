@@ -8,6 +8,7 @@ import cameraRouter from "./routes/camera.routes"
 import errorHandler from "./middleware/errorHandler"
 import identifierRoute from "./routes/identifier.routes"
 import eventRoute from "./routes/events.routes"
+import logRouter from "./routes/log.routes"
 
 
 const app = express()
@@ -18,6 +19,7 @@ app.use(cors({ origin: "http://localhost:3000" }))
 app.use(deviceRouter)
 app.use(cameraRouter)
 app.use(eventRoute)
+app.use(logRouter)
 app.use(identifierRoute)
 app.use(errorHandler)
 

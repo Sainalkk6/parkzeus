@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { act, useState } from "react";
 import CustomLabel from "./CustomLabel";
 import CustomListItems from "./CustomListItems";
 import ListContainer from "./Listcontainer";
@@ -23,6 +23,7 @@ const Aside = () => {
               <CustomListItems setActiveLink={setActiveLink} isActive={activeLink === "Identifiers" ? true : false} pointer="identifiers" label="Identifiers" />
               <CustomListItems label="Reservations" />
               <CustomListItems label="Alerts" />
+              <CustomListItems label="Access Reports" isActive ={activeLink === "Access Reports" ? true : false} pointer="access-reports" setActiveLink={setActiveLink} />
               <CustomListItems setActiveLink={setActiveLink} isActive={activeLink === "ANPR Events" ? true : false} pointer="ANPR-events" label="ANPR Events" />
             </ul>
           </ListContainer>
