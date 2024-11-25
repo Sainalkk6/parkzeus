@@ -9,11 +9,13 @@ import Identifier from "../sequelize/models/Identifier"
 const getEvents = async (data: any) => {
     let id: number | undefined
     const timeStamp = data.info.event_timestamp
-    const date = new Date(timeStamp).toString()
-    const compressedData = { cameraId: data.event.externalCameraId, externalId: data.extras.ac_external_camera_id, identifierId: data.event.name, timeStamp: date, images: data.image_urls.cloud_images, cameraName: data.event.external_camera_id }
+
+    const date = new Date(timeStamp * 1000)
+    const newDate = date.toString()
+    const compressedData = { cameraId: data.event.externalCameraId, externalId: data.extras.ac_external_camera_id, identifierId: data.event.name, timeStamp: newDate, images: data.image_urls.cloud_images, cameraName: data.event.external_camera_id }
     const response = await Events.create({ serverEvents: data, eventLog: compressedData, externalCameraId: compressedData.externalId })
     const camera = await Camera.findOne({ where: { cameraId: compressedData.externalId } })
-    const identifierId = compressedData.identifierId &&  await Identifier.findOne({where:{identifierId:compressedData.identifierId}}) 
+    const identifierId = compressedData.identifierId && await Identifier.findOne({ where: { identifierId: compressedData.identifierId } })
 
     if (camera) {
         if (camera.type === 'entry') {
@@ -34,7 +36,7 @@ const getEvents = async (data: any) => {
     }
 
     if (id !== undefined && identifierId) {
-        await createLog({ cameraId: compressedData.externalId, transactionId: id,vehicleId:identifierId.identifierId })
+        await createLog({ cameraId: compressedData.externalId, transactionId: id, vehicleId: identifierId.identifierId })
     }
 
     return response

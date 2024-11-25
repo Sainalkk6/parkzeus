@@ -5,19 +5,12 @@ import TableBody from "./TableBody";
 
 
 const Table = () => {
+  const labels = ["Vehicle Category","Vehicle Number", "Tag no","Entry Gate","Exit Gate","Entry Time","Exit Time","Duration","Validity Status"]
  
   return (
     <div className="shadow-md bg-slate-200 w-full px-4 flex flex-col border-b">
       <div className="w-full grid grid-cols-9 justify-between ">
-        <TableHead label="Vehicle Category" />
-        <TableHead label="Vehicle Number" />
-        <TableHead label="Tag no" />
-        <TableHead label="Entry Gate" />
-        <TableHead label="Exit Gate" />
-        <TableHead label="Entry Time" />
-        <TableHead label="Exit Time" />
-        <TableHead label="Duration" />
-        <TableHead label="Validity Status" />
+        {labels.map(label=><TableHead label={label} key={label}/>)}
       </div>
       <TableBody />
       <div className="flex items-center w-full justify-center gap-5 py-5">

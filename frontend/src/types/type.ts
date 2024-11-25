@@ -232,3 +232,8 @@ export type AccessReportType = {
     entryTime:string;
     exitTime:string;
 }
+
+export type TableArraItemsType={
+    width?:string;
+    label:string | number;
+}

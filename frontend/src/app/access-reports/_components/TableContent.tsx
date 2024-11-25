@@ -3,17 +3,10 @@ import TableItem from "./TableItem";
 import { AccessReportType } from "@/types/type";
 
 const TableContent = (props: AccessReportType) => {
+  const items = [props.vehicleCategory,props.vehicleNumber,props.tagNo,props.entryGate,props.exitGate,props.entryTime,props.exitTime,props.duration]
   return (
     <div className="border-b grid grid-cols-9 py-[10px] bg-white w-full">
-      <TableItem label={props.vehicleCategory} />
-      <TableItem label={props.vehicleNumber} />
-      <TableItem label={props.tagNo} />
-      <TableItem label={props.entryGate} />
-      <TableItem label={props.exitGate} />
-      <TableItem label={props.entryTime} />
-      <TableItem label={props.exitTime} />
-      <TableItem label={props.duration} />
-      <TableItem label={props.validityStatus} />
+      {items.map((item,index)=><TableItem label={item} key={index}/>)}
     </div>
   );
 };

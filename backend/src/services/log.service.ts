@@ -3,8 +3,10 @@ import { Camera } from "../sequelize/models/Camera"
 import { Log, LogAttributes } from "../sequelize/models/Log"
 import Identifier from "../sequelize/models/Identifier"
 import { Parser } from 'json2csv'
-import fs from "fs"
-import PDFDocument, { write } from "pdfkit"
+import PDFDocument from "pdfkit-table"
+import { Response } from "express"
+
+
 
 
 const createLog = async (data: LogAttributes) => {
@@ -15,7 +17,7 @@ const createLog = async (data: LogAttributes) => {
 
 const getLog = async () => {
     let data: { vehicleCategory: string, vehicleNumber: string, tagNo: string, entryGate: string, exitGate: string, entryTime: Date | string, exitTime: Date | string, duration: string, validityStatus: string }[] = []
- 
+
     const transactions = await Transaction.findAll()
     let formattedTime = ""
     for (let log of transactions) {
@@ -29,6 +31,7 @@ const getLog = async () => {
             else if (cam?.type === "exit") exitCam = cam.label!
 
         })
+
         const entryDate = log?.entryTime?.toString().slice(0, 15)
         const exitDate = log?.exitTime?.toString().slice(0, 15)
         const formattedEntryTime = log?.entryTime?.toString().slice(17, 24)
@@ -37,7 +40,8 @@ const getLog = async () => {
         const exitTime = log?.exitTime?.getTime()
         const finalExitTime = (exitDate && formattedExitTime) === undefined ? "-" : `${exitDate} - ${formattedExitTime}`
         const finalEntryTime = (entryDate && formattedEntryTime) === undefined ? "-" : `${entryDate} - ${formattedEntryTime}`
-        if (exitTime && entryTime) {
+
+        if ((exitTime !== undefined) && entryTime !== undefined) {
             const duration = exitTime - entryTime
             const seconds = (Math.floor(duration / 1000)) % 60
             const minutes = (Math.floor(seconds / 60)) % 60
@@ -45,7 +49,6 @@ const getLog = async () => {
             formattedTime = `${hours}:${minutes}:${seconds}`
         }
         const identifier = await Identifier.findOne({ where: { identifierId: log?.identifierId }, attributes: ["identifierId", "vehicleType"] })
-
         data.push({
             vehicleCategory: identifier?.vehicleType || "",
             vehicleNumber: identifier?.identifierId || "",
@@ -54,7 +57,7 @@ const getLog = async () => {
             exitGate: exitCam || "",
             entryTime: finalEntryTime || "-",
             exitTime: finalExitTime || "-",
-            duration: log?.invalidatedAt ? "-" : formattedTime,
+            duration: log?.invalidatedAt || (entryTime == undefined || exitTime == undefined) ? "-" : formattedTime,
             validityStatus: log?.invalidatedAt ? "Invalid" : "Valid"
         })
     }
@@ -69,14 +72,44 @@ const createCSVReport = async () => {
     return csv
 }
 
-const createPdfReport = async () => {
+const createPdfReport = async (res: Response) => {
     const data = await getLog()
-    const doc = new PDFDocument()
-    doc.on('data', () => doc.write("report.pdf", data))
-    doc.on('end', () => doc.end())
-    doc.fontSize(25).text("yeehawww", 100, 100)
+    const doc = new PDFDocument({ size: "A4", margin: 10 });
+    const createdAt = data[0].entryTime !== null ? data[0].entryTime : data[0].exitTime
+    const till = data[data.length - 1].exitTime !== "-" ? data[data.length - 1].exitTime : data[data.length - 1].entryTime
+    doc.pipe(res)
+
+
+    doc.image("./src/public/ParkZeus-logo.jpg", {
+        fit: [80, 80],
+    })
+
+
+
+    doc.fontSize(17).text("Access Report", 0, 20, { align: "center", height: 500 })
+    doc.fontSize(10).text(`${createdAt} to ${till}`, 0, 45, { align: "center" })
+    doc.text("", 0, 80, { align: "center" })
+
+    const table = {
+        headers: ["Vehicle Category", "Vehicle Number", "Tag No", "Entry Gate", "Exit Gate", "Entry Time", "Exit Time", "Duration", "Validity Status"],
+        rows: data.map(item => [
+            item.vehicleCategory,
+            item.vehicleNumber,
+            item.tagNo,
+            item.entryGate,
+            item.exitGate,
+            item.entryTime,
+            item.exitTime,
+            item.duration,
+            item.validityStatus
+        ])
+    }
+
+    await doc.table(table as any)
+
     doc.end()
-}
+};
+
 
 export { createLog, getLog, createCSVReport, createPdfReport }
 

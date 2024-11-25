@@ -25,13 +25,12 @@ const createCSV = async (req: Request, res: Response, next: NextFunction) => {
 
 const createPdf = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const data = await createPdfReport()
-        res.header('Content-Type',"application/pdf").attachment("report.pdf").send(data)
-
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename="report.pdf"');
+        await createPdfReport(res); 
     } catch (error) {
-        next(error)
-        res.status(400)
+        next(error);
     }
-}
+};
 
 export { getLogReports, createCSV, createPdf }
